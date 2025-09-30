@@ -27,7 +27,7 @@ jobs:
                   context: ./frontend/pruebita1_docker
                   push: true
                   tags: ${{ secrets.DOCKER_USERNAME }}/frontend_example_docker:latest
-                  file: ./frontend/pruebita1_docker/Dockerfile
+                  file: ./Dockerfile
             
             
 
