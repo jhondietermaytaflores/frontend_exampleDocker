@@ -24,7 +24,7 @@ jobs:
             - name: Build y push de la DockerImage
               uses: docker/build-push-action@v4
               with:
-                  context: ./frontend/pruebita1_docker
+                  context: .
                   push: true
                   tags: ${{ secrets.DOCKER_USERNAME }}/frontend_example_docker:latest
                   file: ./Dockerfile
