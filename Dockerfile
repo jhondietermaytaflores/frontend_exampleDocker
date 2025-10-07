@@ -1,19 +1,25 @@
 FROM node:20-alpine 
 
-WORKDIR /react-vite-app
+WORKDIR /app
 
-
-#COPY pruebita1_docker/ .
-#RUN npm install
-
-#COPY pruebita1_docker/package*.json ./ 
+# Copiar archivos de dependencias
 COPY package.json package-lock.json ./
-RUN npm install --silent
 
-COPY . ./
+RUN npm install 
+
+COPY . .
+
+RUN npm run build
+
+FROM nginx:alpine
+COPY --from=build /app/dist /usr/share/nginx/html
+
+
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE  80
 
-CMD ["npm", "run", "dev"]
+CMD ["nginx", "-g", "daemon off;"]
+#CMD ["npm", "run", "dev"]
 
 
